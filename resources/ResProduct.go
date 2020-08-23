@@ -1,6 +1,8 @@
 package resources
 
 import (
+	"fmt"
+	"strconv"
 	"tdez/models"
 	"time"
 )
@@ -10,7 +12,8 @@ type ResProduct struct {
 	Code            *int       `json:"code"`
 	CostumermidCnpj int        `json:"costumermid_cnpj"`
 	CostumerEmail   string     `json:"costumer_email"`
-	CostumerCpfCnj  int        `json:"costumer_cpf_cnj"`
+	CostumerCpfCnj  string     `json:"costumer_cpf_cnj"`
+	CostumerType    int        `json:"costumer_type"`
 	Status          int        `json:"status"`
 	StatusReason    *string    `json:"status_reason"`
 	DateUpdt        *time.Time `json:"date_updt"`
@@ -24,8 +27,15 @@ type ResProduct struct {
 func (r *ResProduct) ResProductResource(mod models.ResProduct) {
 	r.Code = &mod.Code
 	r.CostumermidCnpj = mod.CostumermidCnpj
-	r.CostumerEmail = mod.CostumerEmail
-	r.CostumerCpfCnj = mod.CostumerCpfCnj
+
+	cpfCnpj := mod.CostumerCpfCnj
+	if mod.CostumerType == 0 {
+		r.CostumerCpfCnj = fmt.Sprintf("%011s", strconv.Itoa(int(cpfCnpj)))
+	} else if mod.CostumerType == 1 {
+		r.CostumerCpfCnj = fmt.Sprintf("%015s", strconv.Itoa(int(cpfCnpj)))
+
+	}
+	r.CostumerType = mod.CostumerType
 	r.Status = mod.Status
 	r.StatusReason = mod.StatusReason
 	r.DateUpdt = mod.DateUpdt

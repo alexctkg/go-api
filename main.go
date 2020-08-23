@@ -42,8 +42,8 @@ func SetupRouter() *gin.Engine {
 
 	superUserRouter := router.Group("admin")
 	superUserRouter.Use(middleware.Jwt(0)) // 0- to super users
-	superUserRouter.POST("/reject", product.RejectActivation)
-	superUserRouter.POST("/aprove", product.AproveActivation)
+	superUserRouter.PUT("/reject", product.RejectActivation)
+	superUserRouter.PUT("/aprove", product.AproveActivation)
 
 	externalAppRouter := router.Group("external") //1- to external
 	externalAppRouter.Use(middleware.Jwt(1))

@@ -37,15 +37,12 @@ func SetupRouter() *gin.Engine {
 
 	// router.POST("/login")
 
-	superUserRoutes := router.Group("")
-	superUserRoutes.Use(middleware.Jwt(0)){
+	superUserRouter := router.Group("admin")
+	superUserRouter.Use(middleware.Jwt(0)) // 0- to super users
 
-	}
-
-	externalAppRoutes := router.Group("")
-	externalAppRoutes.Use(middleware.Jwt(1)){
-		
-	}
+	externalAppRouter := router.Group("external") //1- to external
+	externalAppRouter.Use(middleware.Jwt(1))
+	externalAppRouter.POST("")
 
 	return router
 

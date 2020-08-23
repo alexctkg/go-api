@@ -6,6 +6,7 @@ import (
 	"tdez/requests"
 	"tdez/utils"
 
+	cnpjValid "github.com/Nhanderu/brdoc"
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,6 +23,10 @@ func ExternalUserStore(c *gin.Context) {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{"O campo CNPJ é obrigatório ao cadastrar uma empresa parceira"}})
 		c.Abort()
 		return
+	}
+	if cnpjValid.IsCNPJ(*request.Cnpj) != true {
+		c.JSON(200, gin.H{"messages": []string{"CNPJ inválido"}})
+		c.Abort()
 	}
 
 	if err := utils.Valid(request); err != nil {

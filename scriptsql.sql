@@ -22,7 +22,7 @@ create schema resources;
 create table resources.res_product(
 	pro_code serial not null,
 	pro_costumermid_cnpj int8 not null,
-	pro_costumer_email varchar(255) not null,
+	pro_costumermid_email varchar(255) not null,
 	pro_costumer_cpf_cnj int8 not null,
     pro_status int not null default 0, --0-pending; 1-accept; 2-declined
 	pro_status_reason text null, 

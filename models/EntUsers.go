@@ -20,14 +20,14 @@ type EntUsers struct {
 	DateDel         *time.Time `gorm:"column:use_date_del"`
 }
 
-// TableName Seta o nome da tabela
+// TableName schema and table references
 func (e *EntUsers) TableName() string {
 	return "entity.ent_users"
 }
 
-//EntUsersFill preenche o model a partir de um request
-func (e *EntUsers) EntUsersFill(req requests.EntUsers) error {
-	e.Code = req.Code
+//EntUsersFill fill model by resource
+func (e *EntUsers) EntUsersFill(req requests.EntUsersStore) error {
+
 	e.Email = req.Email
 
 	if req.Cnpj != nil {
@@ -41,7 +41,6 @@ func (e *EntUsers) EntUsersFill(req requests.EntUsers) error {
 	e.RazaoSocial = req.RazaoSocial
 	e.Password = req.Password
 	e.ConfirmPassword = req.ConfirmPassword
-	e.Token = req.Token
 	e.Type = req.Type
 
 	return nil

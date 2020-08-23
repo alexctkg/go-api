@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	controllers "tdez/controllers"
+	"tdez/middleware"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -32,6 +33,19 @@ func SetupRouter() *gin.Engine {
 
 	//routes do insert super users and enterprises (no authentication)
 	router.POST("/superuser", controllers.SuperUserStore)
+	router.POST("/externalapp", controllers.ExternalUserStore)
+
+	// router.POST("/login")
+
+	superUserRoutes := router.Group("")
+	superUserRoutes.Use(middleware.Jwt(0)){
+
+	}
+
+	externalAppRoutes := router.Group("")
+	externalAppRoutes.Use(middleware.Jwt(1)){
+		
+	}
 
 	return router
 

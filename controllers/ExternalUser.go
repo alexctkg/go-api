@@ -4,12 +4,13 @@ import (
 	"tdez/database.go"
 	"tdez/models"
 	"tdez/requests"
+	"tdez/utils"
 
 	"github.com/gin-gonic/gin"
 )
 
 func ExternalUserStore(c *gin.Context) {
-	var request requests.EntUsers
+	var request requests.EntUsersStore
 
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
@@ -18,8 +19,13 @@ func ExternalUserStore(c *gin.Context) {
 	}
 
 	if request.Cnpj == nil {
-		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
+		c.AbortWithStatusJSON(400, gin.H{"errors": []string{"O campo CNPJ é obrigatório ao cadastrar uma empresa parceira"}})
 		c.Abort()
+		return
+	}
+
+	if err := utils.Valid(request); err != nil {
+		c.JSON(400, gin.H{"errors": err})
 		return
 	}
 
@@ -35,15 +41,17 @@ func ExternalUserStore(c *gin.Context) {
 
 	request.Type = 1 //external user
 
-	if err := user.EntUsersFill(request).Error; err != nil {
+	err = user.EntUsersFill(request)
+	if err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
 		c.Abort()
 		return
 	}
 
-	if err := tx.Save(&user).Error; err != nil {
+	if err := tx.Create(&user).Error; err != nil {
 		tx.Rollback()
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
+
 		c.Abort()
 		return
 	}

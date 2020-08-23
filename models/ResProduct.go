@@ -20,12 +20,12 @@ type ResProduct struct {
 	CodeIntUse      *int       `gorm:"column:use_code_int"`
 }
 
-// TableName Seta o nome da tabela
+// TableName schema and table references
 func (r *ResProduct) TableName() string {
 	return "resources.res_product"
 }
 
-//ResProductFill preenche o model a partir de um request
+//ResProductFill fill model by resource
 func (r *ResProduct) ResProductFill(req requests.ResProduct) {
 	r.Code = req.Code
 	r.CostumermidCnpj = req.CostumermidCnpj

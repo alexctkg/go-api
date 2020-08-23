@@ -2,8 +2,8 @@ package requests
 
 import "time"
 
-// ResPorduct ...
-type ResPorduct struct {
+// ResProduct ...
+type ResProduct struct {
 	Code            int        `json:"code" validate:"required"`
 	CostumermidCnpj int        `json:"costumermid_cnpj" validate:"required"`
 	CostumerEmail   string     `json:"costumer_email" validate:"required,max=255"`

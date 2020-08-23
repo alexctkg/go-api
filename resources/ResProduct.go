@@ -20,7 +20,7 @@ type ResProduct struct {
 	CodeIntUse      *int       `json:"code_int_use"`
 }
 
-//ResProductResource preenche um ressource apartir de um model
+//ResProductResource fill resource by model
 func (r *ResProduct) ResProductResource(mod models.ResProduct) {
 	r.Code = mod.Code
 	r.CostumermidCnpj = mod.CostumermidCnpj

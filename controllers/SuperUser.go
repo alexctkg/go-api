@@ -4,12 +4,13 @@ import (
 	"tdez/database.go"
 	"tdez/models"
 	"tdez/requests"
+	"tdez/utils"
 
 	"github.com/gin-gonic/gin"
 )
 
 func SuperUserStore(c *gin.Context) {
-	var request requests.EntUsers
+	var request requests.EntUsersStore
 
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
@@ -17,10 +18,14 @@ func SuperUserStore(c *gin.Context) {
 		return
 	}
 
+	if err := utils.Valid(request); err != nil {
+		c.JSON(400, gin.H{"errors": err})
+		return
+	}
+
 	db, err := database.SetupDB()
 	if err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
-
 		c.Abort()
 		return
 	}
@@ -30,13 +35,14 @@ func SuperUserStore(c *gin.Context) {
 
 	request.Type = 0 //superuser
 
-	if err := user.EntUsersFill(request).Error; err != nil {
+	err = user.EntUsersFill(request)
+	if err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
 		c.Abort()
 		return
 	}
 
-	if err := tx.Save(&user).Error; err != nil {
+	if err := tx.Create(&user).Error; err != nil {
 		tx.Rollback()
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
 		c.Abort()

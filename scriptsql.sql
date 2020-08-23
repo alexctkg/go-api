@@ -29,8 +29,8 @@ create table resources.res_product(
 	pro_date_updt timestamp null, 
 	pro_date_ins timestamp not null DEFAULT now(),
     pro_date_del timestamp null,
-    use_code_ext int not null, --user external app solicitation
-    use_code_int int null, --superuser code response
+    use_code_ext int not null, --user external app, solicitation
+    use_code_int int null, --superuser code, response
 
     CONSTRAINT pk_res_produto PRIMARY KEY (pro_code),
     CONSTRAINT fk_use_code1 FOREIGN KEY (use_code_ext) REFERENCES entity.ent_users(use_code),

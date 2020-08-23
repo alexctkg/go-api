@@ -25,9 +25,8 @@ func (r *ResProduct) TableName() string {
 	return "resources.res_product"
 }
 
-//ResProductFill fill model by resource
+//ResProductFill fill model by request
 func (r *ResProduct) ResProductFill(req requests.ResProduct) {
-	r.Code = req.Code
 	r.CostumermidCnpj = req.CostumermidCnpj
 	r.CostumerEmail = req.CostumerEmail
 	r.CostumerCpfCnj = req.CostumerCpfCnj

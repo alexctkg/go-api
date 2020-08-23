@@ -54,6 +54,7 @@ func CreateTokenJWT(user models.EntUsers) (string, error) {
 		"exp":      time.Now().Add(ttl).Unix(),
 		"jti":      uuid,
 		"remember": remember,
+		"code":     user.Code,
 		"access":   user.Type, //0 and 1
 	}
 

@@ -1,4 +1,4 @@
-package controllers
+package entity
 
 import (
 	"tdez/database.go"
@@ -62,7 +62,6 @@ func ExternalUserStore(c *gin.Context) {
 	}
 
 	tx.Commit()
-
 	c.JSON(200, gin.H{"messages": []string{"O usuário foi salvo com sucesso"}})
 	c.Abort()
 	return

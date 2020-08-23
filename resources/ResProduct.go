@@ -7,7 +7,7 @@ import (
 
 // ResProduct ...
 type ResProduct struct {
-	Code            int        `json:"code"`
+	Code            *int       `json:"code"`
 	CostumermidCnpj int        `json:"costumermid_cnpj"`
 	CostumerEmail   string     `json:"costumer_email"`
 	CostumerCpfCnj  int        `json:"costumer_cpf_cnj"`
@@ -22,7 +22,7 @@ type ResProduct struct {
 
 //ResProductResource fill resource by model
 func (r *ResProduct) ResProductResource(mod models.ResProduct) {
-	r.Code = mod.Code
+	r.Code = &mod.Code
 	r.CostumermidCnpj = mod.CostumermidCnpj
 	r.CostumerEmail = mod.CostumerEmail
 	r.CostumerCpfCnj = mod.CostumerCpfCnj

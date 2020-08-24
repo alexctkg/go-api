@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/Nhanderu/brdoc v1.1.2
+	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible

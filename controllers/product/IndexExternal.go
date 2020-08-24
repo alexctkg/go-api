@@ -9,6 +9,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// IndexExternal godoc
+// @Tags Products
+// @Summary Index products
+// @Description Get a products list
+// @Produce json
+// @Security ApiKeyAuth
+// @Param status query int false "Select product by status 0- pending 1-accepted 2-rejected"
+// @Success 200 {object} models.PessoaShow
+// @Failure 400 {object} models.DefaultError
 func IndexExternal(c *gin.Context) {
 
 	var products []models.ResProduct

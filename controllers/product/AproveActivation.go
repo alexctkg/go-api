@@ -10,6 +10,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// AproveActivation godoc
+// @Tags product
+// @Summary Update product - accpetd
+// @Description
+// @Accept json
+// @Produce json
+// @Security ApiKeyAuth
+// @Param Request body requests.ResProductResponse true "Request body"
+// @Success 200 {object} models.DefaultSuccess
+// @Failure 400 {object} models.DefaultError
+// @Router /reject [put]
 func AproveActivation(c *gin.Context) {
 	var request requests.ResProductResponse
 

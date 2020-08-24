@@ -11,6 +11,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// SuperUserStore godoc
+// @Tags User
+// @Summary Create a superuser
+// @Description Create a super user, no athentication
+// @Accept json
+// @Produce json
+// @Param Request body requests.EntUsersStore true "Request body"
+// @Success 200 {object} models.DefaultSuccess
+// @Failure 400 {object} models.DefaultError
+// @Router /superuser [post]
 func SuperUserStore(c *gin.Context) {
 	var request requests.EntUsersStore
 

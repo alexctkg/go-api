@@ -6,12 +6,22 @@ import (
 	"tdez/requests"
 	"tdez/utils"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/gin-gonic/gin"
 
 	cnpjValid "github.com/Nhanderu/brdoc"
 )
 
+// IssueActivation godoc
+// @Tags product
+// @Summary Store a product issue
+// @Description create a new request
+// @Accept json
+// @Produce json
+// @Security ApiKeyAuth
+// @Param Request body requests.ResProductResponse true "Request body"
+// @Success 200 {object} models.DefaultSuccess
+// @Failure 400 {object} models.DefaultError
+// @Router /reject [put]
 func IssueActivation(c *gin.Context) {
 	var request requests.ResProduct
 
@@ -20,8 +30,6 @@ func IssueActivation(c *gin.Context) {
 		c.Abort()
 		return
 	}
-
-	spew.Dump(request)
 
 	if err := utils.Valid(request); err != nil {
 		c.JSON(400, gin.H{"errors": err})

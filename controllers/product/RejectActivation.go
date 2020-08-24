@@ -60,7 +60,7 @@ func RejectActivation(c *gin.Context) {
 	timeNow := time.Now()
 	product.CodeIntUse = &useCode
 	product.DateUpdt = &timeNow
-	product.Status = 2
+	product.Status = 2 //reject
 	product.StatusReason = request.Reason
 
 	if err := tx.Save(&product).Error; err != nil {

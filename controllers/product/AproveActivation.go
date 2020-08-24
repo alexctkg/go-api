@@ -37,12 +37,6 @@ func AproveActivation(c *gin.Context) {
 
 	useCode := c.MustGet("use_code").(int) //superuser code
 
-	//validation
-	if request.Code != nil {
-		c.AbortWithStatusJSON(400, gin.H{"errors": []string{"É necessário informar o código do produto"}})
-		c.Abort()
-		return
-	}
 	db, err := database.SetupDB()
 	if err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
@@ -52,7 +46,7 @@ func AproveActivation(c *gin.Context) {
 	tx := db.Begin()
 
 	var product models.ResProduct
-	//select product to reject
+	//select product to approve
 	queryProduct := tx.
 		Where("pro_date_del is null").
 		Where("pro_code = ?", request.Code).
@@ -66,7 +60,7 @@ func AproveActivation(c *gin.Context) {
 	timeNow := time.Now()
 	product.CodeIntUse = &useCode
 	product.DateUpdt = &timeNow
-	product.Status = 1 //acceptded
+	product.Status = 1 //approve
 	product.StatusReason = request.Reason
 
 	if err := tx.Save(&product).Error; err != nil {

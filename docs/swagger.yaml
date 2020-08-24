@@ -39,7 +39,25 @@ definitions:
       statusReason:
         type: string
     type: object
-  requests.EntUsersStore:
+  requests.EntExternalUserStore:
+    properties:
+      cnpj:
+        type: string
+      confirm_password:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      razao_social:
+        type: string
+    required:
+    - cnpj
+    - email
+    - password
+    - razao_social
+    type: object
+  requests.EntSuperUserStore:
     properties:
       cnpj:
         type: string
@@ -54,7 +72,6 @@ definitions:
     required:
     - email
     - password
-    - razao_social
     type: object
   requests.ResProductResponse:
     properties:
@@ -70,7 +87,60 @@ info:
   contact: {}
   license: {}
 paths:
+  /index:
+    get:
+      description: Get a externalapp products list
+      parameters:
+      - description: Select product by status 0- pending 1-accepted 2-rejected
+        in: query
+        name: status
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ResProduct'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.DefaultError'
+      security:
+      - ApiKeyAuth: []
+      summary: Index products
+      tags:
+      - Product
   /reject:
+    post:
+      consumes:
+      - application/json
+      description: create a new request
+      parameters:
+      - description: Request body
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.ResProductResponse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DefaultSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.DefaultError'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a product issue
+      tags:
+      - Product
     put:
       consumes:
       - application/json
@@ -94,9 +164,9 @@ paths:
             $ref: '#/definitions/models.DefaultError'
       security:
       - ApiKeyAuth: []
-      summary: Update product - denied
+      summary: Update product - accpetd
       tags:
-      - product
+      - Product
   /superuser:
     post:
       consumes:
@@ -108,7 +178,7 @@ paths:
         name: Request
         required: true
         schema:
-          $ref: '#/definitions/requests.EntUsersStore'
+          $ref: '#/definitions/requests.EntSuperUserStore'
       produces:
       - application/json
       responses:

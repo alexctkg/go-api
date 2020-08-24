@@ -18,12 +18,12 @@ import (
 // @Description Create a external user, no athentication
 // @Accept json
 // @Produce json
-// @Param Request body requests.EntUsersStore true "Request body"
+// @Param Request body requests.EntExternalUserStore true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError
 // @Router /superuser [post]
 func ExternalUserStore(c *gin.Context) {
-	var request requests.EntExternalUsersStore
+	var request requests.EntExternalUserStore
 
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})

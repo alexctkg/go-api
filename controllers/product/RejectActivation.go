@@ -12,7 +12,7 @@ import (
 
 // RejectActivation godoc
 // @Tags product
-// @Summary Update product - denied
+// @Summary Update product - rejected
 // @Description
 // @Accept json
 // @Produce json

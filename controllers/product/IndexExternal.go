@@ -10,16 +10,16 @@ import (
 )
 
 // IndexExternal godoc
-// @Tags Products
+// @Tags Product
 // @Summary Index products
-// @Description Get a products list
+// @Description Get a externalapp products list
 // @Produce json
 // @Security ApiKeyAuth
 // @Param status query int false "Select product by status 0- pending 1-accepted 2-rejected"
 // @Success 200 {object} []models.ResProduct
 // @Failure 400 {object} models.DefaultError
+// @Router /index [get]
 func IndexExternal(c *gin.Context) {
-
 	var products []models.ResProduct
 
 	db, err := database.SetupDB()

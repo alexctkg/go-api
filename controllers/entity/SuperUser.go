@@ -17,12 +17,12 @@ import (
 // @Description Create a super user, no athentication
 // @Accept json
 // @Produce json
-// @Param Request body requests.EntUsersStore true "Request body"
+// @Param Request body requests.EntSuperUserStore true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError
 // @Router /superuser [post]
 func SuperUserStore(c *gin.Context) {
-	var request requests.EntSuperUsersStore
+	var request requests.EntSuperUserStore
 
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})

@@ -9,8 +9,3 @@ type DefaultSuccess struct {
 type DefaultError struct {
 	Error []string `json:"errors"`
 }
-
-// AuthError godoc
-type AuthError struct {
-	Error []string `json:"authErrors"`
-}

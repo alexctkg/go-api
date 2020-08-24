@@ -25,6 +25,48 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/index": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get a externalapp products list",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Index products",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Select product by status 0- pending 1-accepted 2-rejected",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ResProduct"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultError"
+                        }
+                    }
+                }
+            }
+        },
         "/reject": {
             "put": {
                 "security": [
@@ -39,9 +81,52 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "product"
+                    "Product"
                 ],
-                "summary": "Update product - denied",
+                "summary": "Update product - accpetd",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "Request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.ResProductResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "create a new request",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Create a product issue",
                 "parameters": [
                     {
                         "description": "Request body",
@@ -89,7 +174,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.EntUsersStore"
+                            "$ref": "#/definitions/requests.EntSuperUserStore"
                         }
                     }
                 ],
@@ -172,12 +257,37 @@ var doc = `{
                 }
             }
         },
-        "requests.EntUsersStore": {
+        "requests.EntExternalUserStore": {
             "type": "object",
             "required": [
+                "cnpj",
                 "email",
                 "password",
                 "razao_social"
+            ],
+            "properties": {
+                "cnpj": {
+                    "type": "string"
+                },
+                "confirm_password": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "razao_social": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.EntSuperUserStore": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
             ],
             "properties": {
                 "cnpj": {

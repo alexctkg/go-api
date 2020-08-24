@@ -25,7 +25,7 @@ func (e *EntUsers) TableName() string {
 }
 
 //SuperUserFill fill model by resource
-func (e *EntUsers) SuperUserFill(req requests.EntSuperUsersStore) error {
+func (e *EntUsers) SuperUserFill(req requests.EntSuperUserStore) error {
 
 	e.Email = req.Email
 
@@ -45,7 +45,7 @@ func (e *EntUsers) SuperUserFill(req requests.EntSuperUsersStore) error {
 }
 
 //ExternaUserFill fill model by resource
-func (e *EntUsers) ExternaUserFill(req requests.EntExternalUsersStore) error {
+func (e *EntUsers) ExternaUserFill(req requests.EntExternalUserStore) error {
 
 	e.Email = req.Email
 

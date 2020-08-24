@@ -10,7 +10,7 @@ import (
 )
 
 // IndexAll godoc
-// @Tags Products
+// @Tags Product
 // @Summary Index products
 // @Description Get a products list
 // @Produce json

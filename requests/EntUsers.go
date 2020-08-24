@@ -1,7 +1,7 @@
 package requests
 
-// EntUsersStore struct to store a new user (super or external)
-type EntSuperUsersStore struct {
+// EntSuperUserStore struct to store a new user (super or external)
+type EntSuperUserStore struct {
 	Email           string  `json:"email" validate:"required,max=255"`
 	Cnpj            *string `json:"cnpj"`
 	RazaoSocial     *string `json:"razao_social"`
@@ -10,8 +10,8 @@ type EntSuperUsersStore struct {
 	Type            int     `json:"-"`
 }
 
-// EntUsersStore struct to store a new user (super or external)
-type EntExternalUsersStore struct {
+// EntExternalUserStore struct to store a new user (super or external)
+type EntExternalUserStore struct {
 	Email           string  `json:"email" validate:"required,max=255"`
 	Cnpj            *string `json:"cnpj" validate:"required"`
 	RazaoSocial     *string `json:"razao_social" validate:"required,max=60"`

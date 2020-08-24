@@ -12,8 +12,8 @@ import (
 )
 
 // IssueActivation godoc
-// @Tags product
-// @Summary Store a product issue
+// @Tags Product
+// @Summary Create a product issue
 // @Description create a new request
 // @Accept json
 // @Produce json
@@ -21,7 +21,7 @@ import (
 // @Param Request body requests.ResProductResponse true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError
-// @Router /reject [put]
+// @Router /reject [post]
 func IssueActivation(c *gin.Context) {
 	var request requests.ResProduct
 

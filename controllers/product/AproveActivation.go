@@ -11,7 +11,7 @@ import (
 )
 
 // AproveActivation godoc
-// @Tags product
+// @Tags Product
 // @Summary Update product - accpetd
 // @Description
 // @Accept json

@@ -18,7 +18,7 @@ import (
 // @Param status query int false "Select product by status 0- pending 1-accepted 2-rejected"
 // @Success 200 {object} []models.ResProduct
 // @Failure 400 {object} models.DefaultError
-// @Router /index [get]
+// @Router /external/index [get]
 func IndexExternal(c *gin.Context) {
 	var products []models.ResProduct
 

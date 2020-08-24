@@ -25,49 +25,7 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/index": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Get a externalapp products list",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Index products",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Select product by status 0- pending 1-accepted 2-rejected",
-                        "name": "status",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/models.ResProduct"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.DefaultError"
-                        }
-                    }
-                }
-            }
-        },
-        "/reject": {
+        "/admin/aprove": {
             "put": {
                 "security": [
                     {
@@ -109,7 +67,137 @@ var doc = `{
                         }
                     }
                 }
-            },
+            }
+        },
+        "/admin/index": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get a products list",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Index products",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Select product by status 0- pending 1-accepted 2-rejected",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ResProduct"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultError"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/reject": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update product - rejected",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "Request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.ResProductResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultError"
+                        }
+                    }
+                }
+            }
+        },
+        "/external/index": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get a externalapp products list",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Index products",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Select product by status 0- pending 1-accepted 2-rejected",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ResProduct"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultError"
+                        }
+                    }
+                }
+            }
+        },
+        "/external/reject": {
             "post": {
                 "security": [
                     {
@@ -135,6 +223,46 @@ var doc = `{
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/requests.ResProductResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultError"
+                        }
+                    }
+                }
+            }
+        },
+        "/externalapp": {
+            "post": {
+                "description": "Create a external user, no athentication",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create a superuser",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "Request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.EntExternalUserStore"
                         }
                     }
                 ],

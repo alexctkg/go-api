@@ -21,7 +21,7 @@ import (
 // @Param Request body requests.ResProductResponse true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError
-// @Router /reject [post]
+// @Router /external/reject [post]
 func IssueActivation(c *gin.Context) {
 	var request requests.ResProduct
 

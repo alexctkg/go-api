@@ -21,7 +21,7 @@ import (
 // @Param Request body requests.EntExternalUserStore true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError
-// @Router /superuser [post]
+// @Router /externalapp [post]
 func ExternalUserStore(c *gin.Context) {
 	var request requests.EntExternalUserStore
 

@@ -20,7 +20,7 @@ import (
 // @Param Request body requests.ResProductResponse true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError
-// @Router /reject [put]
+// @Router /admin/aprove [put]
 func AproveActivation(c *gin.Context) {
 	var request requests.ResProductResponse
 

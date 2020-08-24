@@ -23,7 +23,7 @@ func main() {
 	// Swagger configuration
 	docs.SwaggerInfo.Title = "T10 Test"
 	docs.SwaggerInfo.Host = "localhost:8080"
-	docs.SwaggerInfo.Schemes = []string{"https"}
+	docs.SwaggerInfo.Schemes = []string{"http, https"}
 
 	router := SetupRouter()
 	router.Run()

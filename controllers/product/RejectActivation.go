@@ -11,7 +11,7 @@ import (
 )
 
 // RejectActivation godoc
-// @Tags product
+// @Tags Product
 // @Summary Update product - rejected
 // @Description
 // @Accept json
@@ -20,7 +20,7 @@ import (
 // @Param Request body requests.ResProductResponse true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError
-// @Router /reject [put]
+// @Router /admin/reject [put]
 func RejectActivation(c *gin.Context) {
 	var request requests.ResProductResponse
 

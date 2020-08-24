@@ -36,15 +36,3 @@ create table resources.res_product(
     CONSTRAINT fk_use_code2 FOREIGN KEY (use_code_int) REFERENCES entity.ent_users(use_code)
 
 );
-
-
--- ---external app--- (empresas parceiras)
--- create table entity.ent_access (
--- 	eac_code serial not null,
--- 	eac_date_login timestamp not null DEFAULT now(),
---     use_code int not null,
-	
---     CONSTRAINT pk_ent_app_external PRIMARY KEY (eap_code),
--- 	FOREIGN KEY (use_code) REFERENCES entity.ent_users(use_code)
--- );
-

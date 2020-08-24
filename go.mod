@@ -13,6 +13,7 @@ require (
 	github.com/go-openapi/spec v0.19.9 // indirect
 	github.com/go-openapi/swag v0.19.9 // indirect
 	github.com/go-playground/validator/v10 v10.3.0
+	github.com/go-swagger/go-swagger v0.25.0 // indirect
 	github.com/jinzhu/gorm v1.9.16
 	github.com/lib/pq v1.8.0
 	github.com/mailru/easyjson v0.7.6 // indirect

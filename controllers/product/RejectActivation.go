@@ -12,11 +12,12 @@ import (
 
 // RejectActivation godoc
 // @Tags Product
-// @Summary Update product - rejected
-// @Description
+// @Summary Update product rejected
+// @Description reject activation
 // @Accept json
 // @Produce json
 // @Security ApiKeyAuth
+// @Param Authorization header string true "Bearer token"
 // @Param Request body requests.ResProductResponse true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError

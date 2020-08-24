@@ -9,10 +9,9 @@ Execute o arquivo `script.sql` em seu banco PostgresSQL
 ## Sem docker
 1. Clonar o repositório em `$GOPATH/src` com o nome tdez
 2. Entre na pasta `$ cd tdez`
-3. Execute o comando `$ go build`
-4. Executar o projeto `$ go run main.go`
-5. Execute `$ cp .env.example .env`
-6. Configure seu .env 
+3. Executar o projeto `$ go run main.go`
+4. Execute `$ cp .env.example .env`
+5. Configure seu .env 
 
 
 ## Com docker
@@ -30,5 +29,6 @@ como por exemplo: http://localhost:8080/docs/index.html
 
 user:tdez
 password:t10
+
 
 

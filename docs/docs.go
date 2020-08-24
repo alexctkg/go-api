@@ -27,11 +27,7 @@ var doc = `{
     "paths": {
         "/admin/aprove": {
             "put": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
+                "description": "aprove activation",
                 "consumes": [
                     "application/json"
                 ],
@@ -41,8 +37,15 @@ var doc = `{
                 "tags": [
                     "Product"
                 ],
-                "summary": "Update product - accpetd",
+                "summary": "Update product aprove",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "Request body",
                         "name": "Request",
@@ -86,6 +89,13 @@ var doc = `{
                 "summary": "Index products",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Bearer token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "Select product by status 0- pending 1-accepted 2-rejected",
                         "name": "status",
@@ -118,6 +128,7 @@ var doc = `{
                         "ApiKeyAuth": []
                     }
                 ],
+                "description": "reject activation",
                 "consumes": [
                     "application/json"
                 ],
@@ -127,8 +138,15 @@ var doc = `{
                 "tags": [
                     "Product"
                 ],
-                "summary": "Update product - rejected",
+                "summary": "Update product rejected",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "Request body",
                         "name": "Request",
@@ -172,6 +190,13 @@ var doc = `{
                 "summary": "Index products",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Bearer token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "Select product by status 0- pending 1-accepted 2-rejected",
                         "name": "status",
@@ -204,7 +229,7 @@ var doc = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "create a new request",
+                "description": "issue product activation",
                 "consumes": [
                     "application/json"
                 ],
@@ -214,8 +239,15 @@ var doc = `{
                 "tags": [
                     "Product"
                 ],
-                "summary": "Create a product issue",
+                "summary": "Create issue product activation",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "Request body",
                         "name": "Request",
@@ -254,7 +286,7 @@ var doc = `{
                 "tags": [
                     "User"
                 ],
-                "summary": "Create a superuser",
+                "summary": "Create a exteraluser",
                 "parameters": [
                     {
                         "description": "Request body",

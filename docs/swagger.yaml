@@ -91,7 +91,13 @@ paths:
     put:
       consumes:
       - application/json
+      description: aprove activation
       parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: Request body
         in: body
         name: Request
@@ -109,15 +115,18 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.DefaultError'
-      security:
-      - ApiKeyAuth: []
-      summary: Update product - accpetd
+      summary: Update product aprove
       tags:
       - Product
   /admin/index:
     get:
       description: Get a products list
       parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: Select product by status 0- pending 1-accepted 2-rejected
         in: query
         name: status
@@ -144,7 +153,13 @@ paths:
     put:
       consumes:
       - application/json
+      description: reject activation
       parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: Request body
         in: body
         name: Request
@@ -164,13 +179,18 @@ paths:
             $ref: '#/definitions/models.DefaultError'
       security:
       - ApiKeyAuth: []
-      summary: Update product - rejected
+      summary: Update product rejected
       tags:
       - Product
   /external/index:
     get:
       description: Get a externalapp products list
       parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: Select product by status 0- pending 1-accepted 2-rejected
         in: query
         name: status
@@ -197,8 +217,13 @@ paths:
     post:
       consumes:
       - application/json
-      description: create a new request
+      description: issue product activation
       parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: Request body
         in: body
         name: Request
@@ -218,7 +243,7 @@ paths:
             $ref: '#/definitions/models.DefaultError'
       security:
       - ApiKeyAuth: []
-      summary: Create a product issue
+      summary: Create issue product activation
       tags:
       - Product
   /externalapp:
@@ -244,7 +269,7 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.DefaultError'
-      summary: Create a superuser
+      summary: Create a exteraluser
       tags:
       - User
   /superuser:

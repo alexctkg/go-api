@@ -13,11 +13,12 @@ import (
 
 // IssueActivation godoc
 // @Tags Product
-// @Summary Create a product issue
-// @Description create a new request
+// @Summary Create issue product activation
+// @Description issue product activation
 // @Accept json
 // @Produce json
 // @Security ApiKeyAuth
+// @Param Authorization header string true "Bearer token"
 // @Param Request body requests.ResProductResponse true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError

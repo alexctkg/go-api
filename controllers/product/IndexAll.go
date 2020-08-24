@@ -15,6 +15,7 @@ import (
 // @Description Get a products list
 // @Produce json
 // @Security ApiKeyAuth
+// @Param Authorization header string true "Bearer token"
 // @Param status query int false "Select product by status 0- pending 1-accepted 2-rejected"
 // @Success 200 {object} []models.ResProduct
 // @Failure 400 {object} models.DefaultError

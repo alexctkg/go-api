@@ -14,7 +14,7 @@ import (
 
 // ExternalUserStore godoc
 // @Tags User
-// @Summary Create a superuser
+// @Summary Create a exteraluser
 // @Description Create a external user, no athentication
 // @Accept json
 // @Produce json

@@ -1,5 +1,126 @@
+definitions:
+  models.DefaultError:
+    properties:
+      errors:
+        items:
+          type: string
+        type: array
+    type: object
+  models.DefaultSuccess:
+    properties:
+      messages:
+        items:
+          type: string
+        type: array
+    type: object
+  models.ResProduct:
+    properties:
+      code:
+        type: integer
+      codeExtUse:
+        type: integer
+      codeIntUse:
+        type: integer
+      costumerCpfCnpj:
+        type: integer
+      costumerEmail:
+        type: string
+      costumerType:
+        description: 0 cpf 1 cnpj
+        type: integer
+      dateDel:
+        type: string
+      dateIns:
+        type: string
+      dateUpdt:
+        type: string
+      status:
+        type: integer
+      statusReason:
+        type: string
+    type: object
+  requests.EntUsersStore:
+    properties:
+      cnpj:
+        type: string
+      confirm_password:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      razao_social:
+        type: string
+    required:
+    - email
+    - password
+    - razao_social
+    type: object
+  requests.ResProductResponse:
+    properties:
+      code:
+        type: integer
+      reason:
+        type: string
+    required:
+    - code
+    - reason
+    type: object
 info:
   contact: {}
   license: {}
-paths: {}
+paths:
+  /reject:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request body
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.ResProductResponse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DefaultSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.DefaultError'
+      security:
+      - ApiKeyAuth: []
+      summary: Update product - denied
+      tags:
+      - product
+  /superuser:
+    post:
+      consumes:
+      - application/json
+      description: Create a super user, no athentication
+      parameters:
+      - description: Request body
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.EntUsersStore'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DefaultSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.DefaultError'
+      summary: Create a superuser
+      tags:
+      - User
 swagger: "2.0"

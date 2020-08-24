@@ -2,7 +2,7 @@ package entity
 
 import (
 	"fmt"
-	"tdez/database.go"
+	"tdez/database"
 	"tdez/models"
 	"tdez/requests"
 	"tdez/resources"

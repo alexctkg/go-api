@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"tdez/database.go"
+	"tdez/database"
 	"tdez/models"
 	"tdez/requests"
 	"tdez/utils"

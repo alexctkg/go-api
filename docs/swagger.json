@@ -4,5 +4,193 @@
         "contact": {},
         "license": {}
     },
-    "paths": {}
+    "paths": {
+        "/reject": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Update product - denied",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "Request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.ResProductResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultError"
+                        }
+                    }
+                }
+            }
+        },
+        "/superuser": {
+            "post": {
+                "description": "Create a super user, no athentication",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create a superuser",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "Request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.EntUsersStore"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.DefaultError": {
+            "type": "object",
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "models.DefaultSuccess": {
+            "type": "object",
+            "properties": {
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "models.ResProduct": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "codeExtUse": {
+                    "type": "integer"
+                },
+                "codeIntUse": {
+                    "type": "integer"
+                },
+                "costumerCpfCnpj": {
+                    "type": "integer"
+                },
+                "costumerEmail": {
+                    "type": "string"
+                },
+                "costumerType": {
+                    "description": "0 cpf 1 cnpj",
+                    "type": "integer"
+                },
+                "dateDel": {
+                    "type": "string"
+                },
+                "dateIns": {
+                    "type": "string"
+                },
+                "dateUpdt": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "statusReason": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.EntUsersStore": {
+            "type": "object",
+            "required": [
+                "email",
+                "password",
+                "razao_social"
+            ],
+            "properties": {
+                "cnpj": {
+                    "type": "string"
+                },
+                "confirm_password": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "razao_social": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.ResProductResponse": {
+            "type": "object",
+            "required": [
+                "code",
+                "reason"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "reason": {
+                    "type": "string"
+                }
+            }
+        }
+    }
 }

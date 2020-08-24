@@ -2,7 +2,7 @@ package product
 
 import (
 	"strconv"
-	"tdez/database.go"
+	"tdez/database"
 	"tdez/models"
 	"tdez/resources"
 
@@ -16,7 +16,7 @@ import (
 // @Produce json
 // @Security ApiKeyAuth
 // @Param status query int false "Select product by status 0- pending 1-accepted 2-rejected"
-// @Success 200 {object} models.PessoaShow
+// @Success 200 {object} []models.ResProduct
 // @Failure 400 {object} models.DefaultError
 func IndexAll(c *gin.Context) {
 

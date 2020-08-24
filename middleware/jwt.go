@@ -7,7 +7,7 @@ import (
 	"strings"
 	"tdez/models"
 
-	"tdez/database.go"
+	"tdez/database"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"

@@ -17,10 +17,6 @@ type ResProduct struct {
 	Status          string     `json:"status"`
 	StatusReason    *string    `json:"status_reason"`
 	DateUpdt        *time.Time `json:"date_updt"`
-	DateIns         *time.Time `json:"date_ins"`
-	DateDel         *time.Time `json:"date_del"`
-	CodeExtUse      int        `json:"code_ext_use"`
-	CodeIntUse      *int       `json:"code_int_use"`
 }
 
 //ResProductResource fill resource by model
@@ -45,8 +41,5 @@ func (r *ResProduct) ResProductResource(mod models.ResProduct) {
 
 	r.StatusReason = mod.StatusReason
 	r.DateUpdt = mod.DateUpdt
-	r.DateIns = mod.DateIns
-	r.DateDel = mod.DateDel
-	r.CodeExtUse = mod.CodeExtUse
-	r.CodeIntUse = mod.CodeIntUse
+
 }

@@ -22,7 +22,7 @@ import (
 // @Failure 400 {object} models.DefaultError
 // @Router /superuser [post]
 func SuperUserStore(c *gin.Context) {
-	var request requests.EntUsersStore
+	var request requests.EntSuperUsersStore
 
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
@@ -45,14 +45,13 @@ func SuperUserStore(c *gin.Context) {
 
 	var user models.EntUsers
 
-	request.Cnpj = nil
 	request.Type = 0 //superuser
 
 	pass, _ := bcrypt.GenerateFromPassword([]byte(request.Password), bcrypt.DefaultCost)
 	request.Password = string(pass)
 	request.ConfirmPassword = nil
 
-	err = user.EntUsersFill(request)
+	err = user.SuperUserFill(request)
 	if err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
 		c.Abort()

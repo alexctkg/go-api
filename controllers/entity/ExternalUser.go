@@ -15,7 +15,7 @@ import (
 // ExternalUserStore godoc
 // @Tags User
 // @Summary Create a superuser
-// @Description Create a super user, no athentication
+// @Description Create a external user, no athentication
 // @Accept json
 // @Produce json
 // @Param Request body requests.EntUsersStore true "Request body"
@@ -23,7 +23,7 @@ import (
 // @Failure 400 {object} models.DefaultError
 // @Router /superuser [post]
 func ExternalUserStore(c *gin.Context) {
-	var request requests.EntUsersStore
+	var request requests.EntExternalUsersStore
 
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
@@ -65,7 +65,8 @@ func ExternalUserStore(c *gin.Context) {
 	pass, _ := bcrypt.GenerateFromPassword([]byte(request.Password), bcrypt.DefaultCost)
 	request.Password = string(pass)
 	request.ConfirmPassword = nil
-	err = user.EntUsersFill(request)
+
+	err = user.ExternaUserFill(request)
 	if err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
 		c.Abort()

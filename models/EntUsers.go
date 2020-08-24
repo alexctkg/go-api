@@ -24,8 +24,28 @@ func (e *EntUsers) TableName() string {
 	return "entity.ent_users"
 }
 
-//EntUsersFill fill model by resource
-func (e *EntUsers) EntUsersFill(req requests.EntUsersStore) error {
+//SuperUserFill fill model by resource
+func (e *EntUsers) SuperUserFill(req requests.EntSuperUsersStore) error {
+
+	e.Email = req.Email
+
+	if req.Cnpj != nil {
+		cnpj, err := strconv.Atoi(*req.Cnpj)
+		if err != nil {
+			return err
+		}
+		e.Cnpj = &cnpj
+	}
+
+	e.RazaoSocial = req.RazaoSocial
+	e.Password = req.Password
+	e.Type = req.Type
+
+	return nil
+}
+
+//ExternaUserFill fill model by resource
+func (e *EntUsers) ExternaUserFill(req requests.EntExternalUsersStore) error {
 
 	e.Email = req.Email
 

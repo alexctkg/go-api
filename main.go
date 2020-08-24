@@ -6,6 +6,7 @@ import (
 	entity "tdez/controllers/entity"
 	product "tdez/controllers/product"
 
+	"tdez/docs"
 	"tdez/middleware"
 
 	"github.com/gin-contrib/cors"
@@ -13,7 +14,6 @@ import (
 	"github.com/subosito/gotenv"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/swag/example/basic/docs"
 )
 
 func main() {

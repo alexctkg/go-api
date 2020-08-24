@@ -11,11 +11,19 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/subosito/gotenv"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/swag/example/basic/docs"
 )
 
 func main() {
 	gotenv.Load()
 	gin.SetMode(os.Getenv("GIN_MODE"))
+
+	// Swagger configuration
+	docs.SwaggerInfo.Title = "T10 Test"
+	docs.SwaggerInfo.Host = "localhost:8080"
+	docs.SwaggerInfo.Schemes = []string{"https"}
 
 	router := SetupRouter()
 	router.Run()
@@ -50,6 +58,9 @@ func SetupRouter() *gin.Engine {
 	externalAppRouter.Use(middleware.Jwt(1))
 	externalAppRouter.POST("/product", product.IssueActivation)
 	externalAppRouter.GET("/index", product.IndexExternal)
+
+	swagger := router.Group("/docs")
+	swagger.GET("/*any", ginSwagger.WrapHandler(swaggerFiles.Handler)) // api documentation HOST/docs/index.html
 
 	return router
 

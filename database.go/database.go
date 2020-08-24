@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/jinzhu/gorm"
+	_ "github.com/lib/pq"
 )
 
 //SetupDB database configuration

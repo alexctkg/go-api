@@ -1,19 +1,15 @@
 package requests
 
-import "time"
-
-// ResProduct ...
+// ResProduct - external app to create issue
 type ResProduct struct {
-	Code            *int       `json:"code"`
-	CostumermidCnpj int        `json:"costumermid_cnpj" validate:"required"`
-	CostumerEmail   string     `json:"costumer_email" validate:"required,max=255"`
-	CostumerCpfCnj  string     `json:"costumer_cpf_cnj" validate:"required"`
-	CostumerType    int        `json:"costumer_type" validate:"required,oneof=0 1"` //0 cpf 1 cnpj
-	Status          int        `json:"status"`
-	StatusReason    *string    `json:"reason"`
-	DateUpdt        *time.Time `json:"date_updt"`
-	DateIns         *time.Time `json:"date_ins" validate:"required"`
-	DateDel         *time.Time `json:"date_del"`
-	CodeExtUse      int        `json:"code_ext_use"`
-	CodeIntUse      *int       `json:"code_int_use"`
+	Code            *int   `json:"code"`
+	CostumerCpfCnpj string `json:"costumermid_cpf_cnpj" validate:"required"` //0 cpf 1 cnpj
+	CostumerEmail   string `json:"costumermid_email" validate:"required,max=255"`
+	CostumerType    int    `json:"costumermid_type" validate:"oneof=0 1"`
+}
+
+// ResProductResponse - super user to aprove or decline issue
+type ResProductResponse struct {
+	Code   *int    `json:"code"  validate:"required"`
+	Reason *string `json:"reason" validate:"required"`
 }

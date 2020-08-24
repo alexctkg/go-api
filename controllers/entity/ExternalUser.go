@@ -6,6 +6,8 @@ import (
 	"tdez/requests"
 	"tdez/utils"
 
+	"golang.org/x/crypto/bcrypt"
+
 	cnpjValid "github.com/Nhanderu/brdoc"
 	"github.com/gin-gonic/gin"
 )
@@ -19,18 +21,22 @@ func ExternalUserStore(c *gin.Context) {
 		return
 	}
 
+	if err := utils.Valid(request); err != nil {
+		c.JSON(400, gin.H{"errors": err})
+		return
+	}
+
 	if request.Cnpj == nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{"O campo CNPJ é obrigatório ao cadastrar uma empresa parceira"}})
 		c.Abort()
 		return
 	}
-	if cnpjValid.IsCNPJ(*request.Cnpj) != true {
-		c.JSON(200, gin.H{"messages": []string{"CNPJ inválido"}})
-		c.Abort()
-	}
 
-	if err := utils.Valid(request); err != nil {
-		c.JSON(400, gin.H{"errors": err})
+	cnpjValidate := cnpjValid.IsCNPJ(*request.Cnpj)
+
+	if cnpjValidate == false {
+		c.AbortWithStatusJSON(400, gin.H{"errors": []string{"CNPJ inválido"}})
+		c.Abort()
 		return
 	}
 
@@ -46,6 +52,9 @@ func ExternalUserStore(c *gin.Context) {
 
 	request.Type = 1 //external user
 
+	pass, _ := bcrypt.GenerateFromPassword([]byte(request.Password), bcrypt.DefaultCost)
+	request.Password = string(pass)
+	request.ConfirmPassword = nil
 	err = user.EntUsersFill(request)
 	if err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
@@ -56,7 +65,6 @@ func ExternalUserStore(c *gin.Context) {
 	if err := tx.Create(&user).Error; err != nil {
 		tx.Rollback()
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
-
 		c.Abort()
 		return
 	}

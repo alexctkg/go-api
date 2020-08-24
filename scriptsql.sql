@@ -6,7 +6,6 @@ create table entity.ent_users (
     use_cnpj  int8  null,
     use_razao_social varchar(60)  null,
     use_password varchar(255) not null,
-    use_confirm_password varchar(255) null,
     use_token text null,
 	use_type int not null, --0-super user 1-external app
 	use_date_ins timestamp not null DEFAULT now(),
@@ -21,10 +20,9 @@ create schema resources;
 
 create table resources.res_product(
 	pro_code serial not null,
-	pro_costumermid_cnpj int8 not null,
+	pro_costumermid_cpf_cnpj int8 not null,
 	pro_costumermid_email varchar(255) not null,
-	pro_costumer_cpf_cnj int8 not null,
-    pro_costumer_type int null, --0-cpf 1-cnpj
+    pro_costumermid_type int null, --0-cpf 1-cnpj
     pro_status int not null default 0, --0-pending; 1-accept; 2-declined
 	pro_status_reason text null, 
 	pro_date_updt timestamp null, 

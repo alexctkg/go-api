@@ -43,7 +43,7 @@ func Jwt(accessType int) gin.HandlerFunc {
 						return
 					}
 
-					accessClaim := claims["access"].(int)
+					accessClaim := int(claims["access"].(float64))
 					if accessType != accessClaim {
 						c.JSON(http.StatusBadRequest, gin.H{"authErrors": []string{"Access denied"}})
 						c.Abort()

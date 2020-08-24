@@ -44,10 +44,12 @@ func SetupRouter() *gin.Engine {
 	superUserRouter.Use(middleware.Jwt(0)) // 0- to super users
 	superUserRouter.PUT("/reject", product.RejectActivation)
 	superUserRouter.PUT("/aprove", product.AproveActivation)
+	superUserRouter.GET("/index", product.IndexAll)
 
 	externalAppRouter := router.Group("external") //1- to external
 	externalAppRouter.Use(middleware.Jwt(1))
 	externalAppRouter.POST("/product", product.IssueActivation)
+	externalAppRouter.GET("/index", product.IndexExternal)
 
 	return router
 

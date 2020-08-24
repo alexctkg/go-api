@@ -11,7 +11,7 @@ import (
 )
 
 func RejectActivation(c *gin.Context) {
-	var request requests.ResProduct
+	var request requests.ResProductResponse
 
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
@@ -34,13 +34,6 @@ func RejectActivation(c *gin.Context) {
 	}
 	tx := db.Begin()
 
-	//validation
-	if request.StatusReason == nil || request.Code == nil {
-		c.AbortWithStatusJSON(400, gin.H{"errors": []string{"É necessário informar o motivo do cancelamento"}})
-		c.Abort()
-		return
-	}
-
 	var product models.ResProduct
 	//select product to reject
 	queryProduct := tx.
@@ -57,7 +50,7 @@ func RejectActivation(c *gin.Context) {
 	product.CodeIntUse = &useCode
 	product.DateUpdt = &timeNow
 	product.Status = 2
-	product.StatusReason = request.StatusReason
+	product.StatusReason = request.Reason
 
 	if err := tx.Save(&product).Error; err != nil {
 		tx.Rollback()

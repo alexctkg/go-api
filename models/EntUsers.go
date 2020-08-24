@@ -8,16 +8,15 @@ import (
 
 // EntUsers ...
 type EntUsers struct {
-	Code            int        `gorm:"column:use_code; primary_key:true"`
-	Email           string     `gorm:"column:use_email"`
-	Cnpj            *int       `gorm:"column:use_cnpj"`
-	RazaoSocial     *string    `gorm:"column:use_razao_social"`
-	Password        string     `gorm:"column:use_password"`
-	ConfirmPassword *string    `gorm:"column:use_confirm_password"`
-	Token           *string    `gorm:"column:use_token"`
-	Type            int        `gorm:"column:use_type"`
-	DateIns         *time.Time `gorm:"column:use_date_ins; default:now()"`
-	DateDel         *time.Time `gorm:"column:use_date_del"`
+	Code        int        `gorm:"column:use_code; primary_key:true"`
+	Email       string     `gorm:"column:use_email"`
+	Cnpj        *int       `gorm:"column:use_cnpj"`
+	RazaoSocial *string    `gorm:"column:use_razao_social"`
+	Password    string     `gorm:"column:use_password"`
+	Token       *string    `gorm:"column:use_token"`
+	Type        int        `gorm:"column:use_type"`
+	DateIns     *time.Time `gorm:"column:use_date_ins; default:now()"`
+	DateDel     *time.Time `gorm:"column:use_date_del"`
 }
 
 // TableName schema and table references
@@ -40,7 +39,6 @@ func (e *EntUsers) EntUsersFill(req requests.EntUsersStore) error {
 
 	e.RazaoSocial = req.RazaoSocial
 	e.Password = req.Password
-	e.ConfirmPassword = req.ConfirmPassword
 	e.Type = req.Type
 
 	return nil

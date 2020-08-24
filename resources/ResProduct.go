@@ -10,7 +10,7 @@ import (
 // ResProduct ...
 type ResProduct struct {
 	Code            *int       `json:"code"`
-	CostumermidCnpj int        `json:"costumermid_cnpj"`
+	CostumerCpfCnpj string     `json:"costumermid_cpf_cnpj"`
 	CostumerEmail   string     `json:"costumer_email"`
 	CostumerCpfCnj  string     `json:"costumer_cpf_cnj"`
 	CostumerType    int        `json:"costumer_type"`
@@ -26,13 +26,12 @@ type ResProduct struct {
 //ResProductResource fill resource by model
 func (r *ResProduct) ResProductResource(mod models.ResProduct) {
 	r.Code = &mod.Code
-	r.CostumermidCnpj = mod.CostumermidCnpj
 
-	cpfCnpj := mod.CostumerCpfCnj
+	cpfCnpj := mod.CostumerCpfCnpj
 	if mod.CostumerType == 0 {
-		r.CostumerCpfCnj = fmt.Sprintf("%011s", strconv.Itoa(int(cpfCnpj)))
+		r.CostumerCpfCnpj = fmt.Sprintf("%011s", strconv.Itoa(int(cpfCnpj)))
 	} else if mod.CostumerType == 1 {
-		r.CostumerCpfCnj = fmt.Sprintf("%015s", strconv.Itoa(int(cpfCnpj)))
+		r.CostumerCpfCnpj = fmt.Sprintf("%015s", strconv.Itoa(int(cpfCnpj)))
 
 	}
 	r.CostumerType = mod.CostumerType

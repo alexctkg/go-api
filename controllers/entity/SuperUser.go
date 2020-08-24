@@ -6,6 +6,8 @@ import (
 	"tdez/requests"
 	"tdez/utils"
 
+	"golang.org/x/crypto/bcrypt"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -33,7 +35,12 @@ func SuperUserStore(c *gin.Context) {
 
 	var user models.EntUsers
 
+	request.Cnpj = nil
 	request.Type = 0 //superuser
+
+	pass, _ := bcrypt.GenerateFromPassword([]byte(request.Password), bcrypt.DefaultCost)
+	request.Password = string(pass)
+	request.ConfirmPassword = nil
 
 	err = user.EntUsersFill(request)
 	if err != nil {

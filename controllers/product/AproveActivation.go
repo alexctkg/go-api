@@ -11,7 +11,7 @@ import (
 )
 
 func AproveActivation(c *gin.Context) {
-	var request requests.ResProduct
+	var request requests.ResProductResponse
 
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{err.Error()}})
@@ -56,7 +56,7 @@ func AproveActivation(c *gin.Context) {
 	product.CodeIntUse = &useCode
 	product.DateUpdt = &timeNow
 	product.Status = 1 //acceptded
-	product.StatusReason = request.StatusReason
+	product.StatusReason = request.Reason
 
 	if err := tx.Save(&product).Error; err != nil {
 		tx.Rollback()

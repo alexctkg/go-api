@@ -9,10 +9,9 @@ import (
 // ResProduct ...
 type ResProduct struct {
 	Code            int        `gorm:"column:pro_code; primary_key:true"`
-	CostumermidCnpj int        `gorm:"column:pro_costumermid_cnpj"`
-	CostumerEmail   string     `gorm:"column:pro_costumer_email"`
-	CostumerCpfCnj  int        `gorm:"column:pro_costumer_cpf_cnj"`
-	CostumerType    int        `gorm:"column:pro_costumer_type"`
+	CostumerCpfCnpj int        `gorm:"column:pro_costumermid_cpf_cnpj"`
+	CostumerEmail   string     `gorm:"column:pro_costumermid_email"`
+	CostumerType    int        `gorm:"column:pro_costumermid_type"` //0 cpf 1 cnpj
 	Status          int        `gorm:"column:pro_status; default:0"`
 	StatusReason    *string    `gorm:"column:pro_status_reason"`
 	DateUpdt        *time.Time `gorm:"column:pro_date_updt"`
@@ -29,21 +28,14 @@ func (r *ResProduct) TableName() string {
 
 //ResProductFill fill model by request
 func (r *ResProduct) ResProductFill(req requests.ResProduct) error {
-	r.CostumermidCnpj = req.CostumermidCnpj
-	r.CostumerEmail = req.CostumerEmail
 
-	cpfCnpj, err := strconv.Atoi(req.CostumerCpfCnj)
+	cpfCnpj, err := strconv.Atoi(req.CostumerCpfCnpj)
 	if err != nil {
 		return err
 	}
-	r.CostumerCpfCnj = cpfCnpj
-	r.Status = req.Status
-	r.StatusReason = req.StatusReason
-	r.DateUpdt = req.DateUpdt
-	r.DateIns = req.DateIns
-	r.DateDel = req.DateDel
-	r.CodeExtUse = req.CodeExtUse
-	r.CodeIntUse = req.CodeIntUse
+	r.CostumerCpfCnpj = cpfCnpj
+	r.CostumerEmail = req.CostumerEmail
+	r.CostumerType = req.CostumerType
 
 	return nil
 }

@@ -12,13 +12,12 @@ import (
 
 // EntUsers ...
 type EntUsers struct {
-	Code            int     `json:"code"`
-	Email           string  `json:"email"`
-	Cnpj            int     `json:"cnpj"`
-	RazaoSocial     *string `json:"razao_social"`
-	Password        string  `json:"password"`
-	ConfirmPassword *string `json:"confirm_password"`
-	Type            int     `json:"-"`
+	Code        int     `json:"code"`
+	Email       string  `json:"email"`
+	Cnpj        int     `json:"cnpj"`
+	RazaoSocial *string `json:"razao_social"`
+	Password    string  `json:"password"`
+	Type        int     `json:"-"`
 }
 
 //EntUsersResource fill resource by model
@@ -27,7 +26,6 @@ func (e *EntUsers) EntUsersResource(mod models.EntUsers) {
 	e.Email = mod.Email
 	e.RazaoSocial = mod.RazaoSocial
 	e.Password = mod.Password
-	e.ConfirmPassword = mod.ConfirmPassword
 	e.Type = mod.Type
 }
 

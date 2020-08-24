@@ -38,13 +38,13 @@ create table resources.res_product(
 );
 
 
----external app--- (empresas parceiras)
-create table entity.ent_access (
-	eac_code serial not null,
-	eac_date_login timestamp not null DEFAULT now(),
-    use_code int not null,
+-- ---external app--- (empresas parceiras)
+-- create table entity.ent_access (
+-- 	eac_code serial not null,
+-- 	eac_date_login timestamp not null DEFAULT now(),
+--     use_code int not null,
 	
-    CONSTRAINT pk_ent_app_external PRIMARY KEY (eap_code),
-	FOREIGN KEY (use_code) REFERENCES entity.ent_users(use_code)
-);
+--     CONSTRAINT pk_ent_app_external PRIMARY KEY (eap_code),
+-- 	FOREIGN KEY (use_code) REFERENCES entity.ent_users(use_code)
+-- );
 

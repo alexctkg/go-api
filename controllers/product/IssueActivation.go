@@ -68,11 +68,11 @@ func IssueActivation(c *gin.Context) {
 	query := tx.
 		Where("pro_costumermid_cpf_cnpj = ?", product.CostumerCpfCnpj).
 		Where("pro_date_updt is null").
-		Where("pro_date_del is not null").
+		Where("pro_date_del is  null").
 		Where("use_code_ext = ?", product.CodeExtUse).
 		Find(&productDB)
 	if query.RowsAffected > 0 {
-		c.AbortWithStatusJSON(400, gin.H{"errors": []string{"Já existe um produto pendente, aguarde até a resolução"}})
+		c.AbortWithStatusJSON(400, gin.H{"errors": []string{"Já existe um produto pendente com este CPF/CNPJ, aguarde até a resolução"}})
 		c.Abort()
 		return
 	}

@@ -49,6 +49,7 @@ func AproveActivation(c *gin.Context) {
 	//select product to approve
 	queryProduct := tx.
 		Where("pro_date_del is null").
+		Where("pro_date_updt is null").
 		Where("pro_code = ?", request.Code).
 		First(&product)
 	if queryProduct.RowsAffected == 0 {
@@ -73,7 +74,9 @@ func AproveActivation(c *gin.Context) {
 
 	//SEND EMAIL TO COSTUMER...
 
-	c.JSON(200, gin.H{"messages": []string{"O produto foi rejeitado com sucesso"}})
+	tx.Commit()
+
+	c.JSON(200, gin.H{"messages": []string{"Ativação aprovada"}})
 	c.Abort()
 	return
 

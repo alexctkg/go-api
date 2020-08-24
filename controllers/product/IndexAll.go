@@ -42,18 +42,18 @@ func IndexAll(c *gin.Context) {
 			c.Abort()
 			return
 		}
+
+		//pending
+		if status == 0 {
+			tx = tx.Where("pro_status = 0")
+		} else if status == 1 { //accepted
+			tx = tx.Where("pro_status = 1")
+		} else if status == 2 { //rejected
+			tx = tx.Where("pro_status = 2")
+		}
 	}
 
 	tx = tx.Where("pro_date_del is null")
-
-	//pending
-	if status == 0 {
-		tx = tx.Where("pro_status = 0")
-	} else if status == 1 { //accepted
-		tx = tx.Where("pro_status = 1")
-	} else if status == 2 { //rejected
-		tx = tx.Where("pro_status = 2")
-	}
 
 	err = tx.Find(&products).Error
 	if err != nil {

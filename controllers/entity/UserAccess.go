@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"fmt"
 	"tdez/database"
 	"tdez/models"
 	"tdez/requests"
@@ -10,7 +9,6 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/gin-gonic/gin"
 )
 
@@ -47,7 +45,6 @@ func Login(c *gin.Context) {
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(request.Password))
-	fmt.Println(err)
 	if err != nil {
 		c.AbortWithStatusJSON(400, gin.H{"errors": []string{"E-mail/senha incorretos"}})
 		c.Abort()
@@ -60,8 +57,6 @@ func Login(c *gin.Context) {
 		c.Abort()
 		return
 	}
-
-	spew.Dump("porcodio")
 
 	user.Token = &token
 

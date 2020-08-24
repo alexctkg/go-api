@@ -49,6 +49,7 @@ func RejectActivation(c *gin.Context) {
 	//select product to reject
 	queryProduct := tx.
 		Where("pro_date_del is null").
+		Where("pro_date_updt is null").
 		Where("pro_code = ?", request.Code).
 		First(&product)
 	if queryProduct.RowsAffected == 0 {
@@ -74,7 +75,7 @@ func RejectActivation(c *gin.Context) {
 	//SEND EMAIL TO COSTUMER...
 
 	tx.Commit()
-	c.JSON(200, gin.H{"messages": []string{"O produto foi rejeitado com sucesso"}})
+	c.JSON(200, gin.H{"messages": []string{"Ativação cancelada"}})
 	c.Abort()
 	return
 

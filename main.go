@@ -59,9 +59,10 @@ func SetupRouter() *gin.Engine {
 	externalAppRouter.POST("/product", product.IssueActivation)
 	externalAppRouter.GET("/index", product.IndexExternal)
 
-	swagger := router.Group("/docs")
+	swagger := router.Group("/docs", gin.BasicAuth(gin.Accounts{
+		"tdez": "t10",
+	}))
 	swagger.GET("/*any", ginSwagger.WrapHandler(swaggerFiles.Handler)) // api documentation HOST/docs/index.html
-
 	return router
 
 }

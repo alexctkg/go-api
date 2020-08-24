@@ -222,7 +222,7 @@ var doc = `{
                 }
             }
         },
-        "/external/reject": {
+        "/external/product": {
             "post": {
                 "security": [
                     {
@@ -254,7 +254,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.ResProductResponse"
+                            "$ref": "#/definitions/requests.ResProduct"
                         }
                     }
                 ],
@@ -303,6 +303,45 @@ var doc = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.DefaultSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.DefaultError"
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Login",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "Request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.EntUsersLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "Autentication"
                         }
                     },
                     "400": {
@@ -464,6 +503,43 @@ var doc = `{
                 },
                 "razao_social": {
                     "type": "string"
+                }
+            }
+        },
+        "requests.EntUsersLogin": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.ResProduct": {
+            "type": "object",
+            "required": [
+                "costumermid_cpf_cnpj",
+                "costumermid_email"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "costumermid_cpf_cnpj": {
+                    "description": "0 cpf 1 cnpj",
+                    "type": "string"
+                },
+                "costumermid_email": {
+                    "type": "string"
+                },
+                "costumermid_type": {
+                    "type": "integer"
                 }
             }
         },

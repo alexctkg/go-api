@@ -73,6 +73,31 @@ definitions:
     - email
     - password
     type: object
+  requests.EntUsersLogin:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  requests.ResProduct:
+    properties:
+      code:
+        type: integer
+      costumermid_cpf_cnpj:
+        description: 0 cpf 1 cnpj
+        type: string
+      costumermid_email:
+        type: string
+      costumermid_type:
+        type: integer
+    required:
+    - costumermid_cpf_cnpj
+    - costumermid_email
+    type: object
   requests.ResProductResponse:
     properties:
       code:
@@ -213,7 +238,7 @@ paths:
       summary: Index products
       tags:
       - Product
-  /external/reject:
+  /external/product:
     post:
       consumes:
       - application/json
@@ -229,7 +254,7 @@ paths:
         name: Request
         required: true
         schema:
-          $ref: '#/definitions/requests.ResProductResponse'
+          $ref: '#/definitions/requests.ResProduct'
       produces:
       - application/json
       responses:
@@ -272,6 +297,31 @@ paths:
       summary: Create a exteraluser
       tags:
       - User
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request body
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.EntUsersLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: Autentication
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.DefaultError'
+      summary: Login
+      tags:
+      - Login
   /superuser:
     post:
       consumes:

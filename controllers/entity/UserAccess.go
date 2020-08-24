@@ -12,6 +12,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Login godoc
+// @Tags Login
+// @Summary Login
+// @Description
+// @Accept json
+// @Produce json
+// @Param Request body requests.EntUsersLogin true "Request body"
+// @Success 200 Autentication token
+// @Failure 400 {object} models.DefaultError
+// @Router /login [post]
 func Login(c *gin.Context) {
 	var request requests.EntUsersLogin
 

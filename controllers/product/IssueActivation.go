@@ -19,10 +19,10 @@ import (
 // @Produce json
 // @Security ApiKeyAuth
 // @Param Authorization header string true "Bearer token"
-// @Param Request body requests.ResProductResponse true "Request body"
+// @Param Request body requests.ResProduct true "Request body"
 // @Success 200 {object} models.DefaultSuccess
 // @Failure 400 {object} models.DefaultError
-// @Router /external/reject [post]
+// @Router /external/product [post]
 func IssueActivation(c *gin.Context) {
 	var request requests.ResProduct
 

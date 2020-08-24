@@ -30,8 +30,6 @@ func validMessage(field string, tag string, param string) string {
 		return "O campo " + field + " deve conter no máximo " + param + " caracter(es)"
 	case "required":
 		return "O campo " + field + " é obrigatório"
-	case "email":
-		return "O campo " + field + " deve conter um e-mail válido"
 	case "oneof":
 		return "O campo " + field + " deve conter um dos seguintes valores:" + param
 	case "eqfield":

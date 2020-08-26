@@ -7,7 +7,7 @@ Teste backend Alex Colussi
 Execute o arquivo `script.sql` em seu banco PostgresSQL
 
 ## Sem docker
-1. Copie a pasta tdez  `$GOPATH/src` 
+1. Clone o repositório  no `$GOPATH/src` 
 2. Entre na pasta `$ cd tdez`
 3. Executar o projeto `$ go run main.go`
 4. Execute `$ cp .env.example .env`
@@ -15,7 +15,7 @@ Execute o arquivo `script.sql` em seu banco PostgresSQL
 
 
 ## Com docker
-1. Copie a pasta tdez no `$GOPATH/src` 
+1. Clone o repositório `$GOPATH/src` 
 2. Execute `$ docker build . -t go-dock`
 3. Execute `$ docker run -p 8080:8080 go-dock` 
 4. Execute `$ cp .env.example .env`

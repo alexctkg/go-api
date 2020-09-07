@@ -1,6 +1,3 @@
-# tdez 
-Teste backend Alex Colussi
-
 # Preparação do ambiente
 
 ## Postgres Database
